@@ -10,10 +10,10 @@ public class VisualizerExporter
     public string ToUrl(ShipGrid ship)
     {
         // Build stacks grid
-        string stacksGrid = BuildGrid(ship, stack =>
+        string             stacksGrid = BuildGrid(ship, stack =>
         {
             if (stack.Containers.Count == 0)
-            {
+{
                 return "";
             }
             else
@@ -35,23 +35,23 @@ public class VisualizerExporter
             }
         });
 
-        var stacksEncoded = stacksGrid;
-        var weightsEncoded = weightsGrid;
 
-        return $"{BaseUrl}?length={ship.Length}&width={ship.Width}&stacks={stacksEncoded}&weights={weightsEncoded}";
+        var url = $"{BaseUrl}?length={ship.Length}&width={ship.Width}&stacks={stacksGrid}&weights={weightsGrid}";
+
+        return url;
     }
 
-    private static string BuildGrid(ShipGrid ship, Func<Stack, string> cellValue)
+    private string BuildGrid(ShipGrid ship, Func<Stack, string> cellValue)
     {
-        var rowStrings = new string[ship.Length];
+        var rowStrings = new string[ship.Width];
 
-        for (int row = 0; row < ship.Length; row++)
+        for (int row = 0; row < ship.Width; row++)
         {
-            var colStrings = new string[ship.Width];
+            var colStrings = new string[ship.Length];
 
-            for (int col = 0; col < ship.Width; col++)
+            for (int col = 0; col < ship.Length; col++)
             {
-                colStrings[col] = cellValue(ship.Stacks[row, col]);
+                colStrings[col] = cellValue(ship.Stacks[col, row]);
             }
 
             rowStrings[row] = string.Join(",", colStrings);
@@ -59,4 +59,5 @@ public class VisualizerExporter
 
         return string.Join("/", rowStrings);
     }
+
 }

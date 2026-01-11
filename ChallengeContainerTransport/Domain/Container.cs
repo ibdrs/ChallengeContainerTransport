@@ -1,15 +1,17 @@
 ﻿namespace ContainerChallenge.Domain;
 public class Container
 {
-    public Container(ContainerType type, int weightTons)
+    public Container(int id, ContainerType type, int weightTons)
     {
         if (weightTons < 4 || weightTons > 30)
             throw new ArgumentOutOfRangeException(nameof(weightTons), "Container weight must be between 4 and 30 tons.");
 
+        Id = id;
         Type = type;
         WeightTons = weightTons;
     }
 
+    public int Id { get; }
     public ContainerType Type { get; }
     public int WeightTons { get; }
 

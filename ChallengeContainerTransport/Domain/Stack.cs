@@ -50,30 +50,6 @@ public class Stack
     }
 
 
-    public bool CanPlace(Container container, int maxWeightAbovePerContainerTons = 120)
-    {
-        // nothing may be stacked on top of valuable cargo
-        if (Top()?.IsValuable == true)
-            return false;
-
-        // Create a "virtual stack" after placement
-        var future = new List<Container>(_containers) { container };
-
-        // For every container i: sum of weights above it must be <= 120
-        for (int i = 0; i < future.Count; i++)
-        {
-            int weightAbove = 0;
-            for (int j = i + 1; j < future.Count; j++)
-                weightAbove += future[j].WeightTons;
-
-            if (weightAbove > maxWeightAbovePerContainerTons)
-                return false;
-        }
-
-        return true;
-    }
-
-
     public void Place(Container container)
     {
         _containers.Add(container);

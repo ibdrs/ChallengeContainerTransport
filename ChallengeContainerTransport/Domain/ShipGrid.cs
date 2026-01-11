@@ -1,4 +1,6 @@
-﻿namespace ContainerChallenge.Domain;
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace ContainerChallenge.Domain;
 
 public class ShipGrid
 {
@@ -12,10 +14,22 @@ public class ShipGrid
 
         // fill the grid using the length and width
         Stacks = new Stack[length, width];
-        for (int r = 0; r < length; r++)
-            for (int c = 0; c < width; c++)
-                Stacks[r, c] = new Stack();
+        for (int row = 0; row < length; row++)
+            for (int col = 0; col < width; col++)
+                Stacks[row, col] = new Stack();
     }
+
+    // HOE ZIET HET GRID ER CONCEPTUEEL UIT? 
+    // var ship = new ShipGrid(length: 4, width: 5);
+    // 
+    // Rows (Length = 4):    0, 1, 2, 3   (front → back)
+    // Cols (Width = 5) :     0, 1, 2, 3, 4 (left → right)
+    //
+    // row 0: [0, 0][0, 1][0, 2][0, 3][0, 4]   ← FRONT
+    // row 1: [1, 0][1, 1][1, 2][1, 3][1, 4]
+    // row 2: [2, 0][2, 1][2, 2][2, 3][2, 4]
+    // row 3: [3, 0][3, 1][3, 2][3, 3][3, 4]   ← BACK
+
 
     public int Length { get; }
     public int Width { get; }
