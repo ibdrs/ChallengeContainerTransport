@@ -12,9 +12,9 @@ var request = new PlacementRequest
     Length = 6,
     Width = 4,
 
-    NormalCount = 100,
+    NormalCount = 64,
     ValuableCount = 4,
-    CoolableCount = 16,
+    CoolableCount = 10,
     ValuableCoolableCount = 2,
 
     NormalWeightTons = 30,
@@ -73,6 +73,7 @@ if (ship == null)
 Console.WriteLine("\r\n");
 
 var exporter = new VisualizerExporter();
+
 var url = exporter.ToUrl(ship);
 
 Console.WriteLine("Visualizer URL:");

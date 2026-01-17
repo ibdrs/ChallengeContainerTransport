@@ -147,11 +147,11 @@ public class MyAlgorithm
         for (int i = 0; i < r.CoolableCount; i++)
             list.Add(new Container(id++, ContainerType.Coolable, r.CoolableWeightTons));
 
-        for (int i = 0; i < r.NormalCount; i++)
-            list.Add(new Container(id++, ContainerType.Normal, r.NormalWeightTons));
-
         for (int i = 0; i < r.ValuableCoolableCount; i++)
             list.Add(new Container(id++, ContainerType.ValuableCoolable, r.ValuableCoolableWeightTons));
+
+        for (int i = 0; i < r.NormalCount; i++)
+            list.Add(new Container(id++, ContainerType.Normal, r.NormalWeightTons));
 
         for (int i = 0; i < r.ValuableCount; i++)
             list.Add(new Container(id++, ContainerType.Valuable, r.ValuableWeightTons));
