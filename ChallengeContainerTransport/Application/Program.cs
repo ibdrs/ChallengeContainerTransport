@@ -9,12 +9,12 @@ Console.WriteLine("Container Challenge (Console)");
 
 var request = new PlacementRequest
 {
-    Length = 10,
+    Length = 6,
     Width = 4,
 
-    NormalCount = 128,
+    NormalCount = 100,
     ValuableCount = 4,
-    CoolableCount = 18,
+    CoolableCount = 16,
     ValuableCoolableCount = 2,
 
     NormalWeightTons = 30,
@@ -57,11 +57,17 @@ foreach (var u in response.Unplaced)
         Console.WriteLine($"  * {reason}");
 }
 
-if (response.Errors?.FirstOrDefault().Length > 0)
+if (response.Errors != null && response.Errors.Any(e => !string.IsNullOrWhiteSpace(e)))
 {
     Console.WriteLine("Ship validation errors:");
-    foreach (var error in response.Errors)
+    foreach (var error in response.Errors.Where(e => !string.IsNullOrWhiteSpace(e)))
         Console.WriteLine($"- {error}");
+}
+
+if (ship == null)
+{
+    Console.WriteLine("No valid ship configuration could be generated.");
+    return;
 }
 
 Console.WriteLine("\r\n");

@@ -9,6 +9,7 @@ namespace ChallengeContainerTransport.Domain.Rules
         {
             error = "";
 
+            // alleen coolable containers
             if (container.Type != ContainerType.Coolable &&
             container.Type != ContainerType.ValuableCoolable)
                 return true;
@@ -22,3 +23,4 @@ namespace ChallengeContainerTransport.Domain.Rules
         }
     }
 }
+

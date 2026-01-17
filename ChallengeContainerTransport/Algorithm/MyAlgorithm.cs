@@ -88,7 +88,7 @@ public class MyAlgorithm
             }
         }
 
-        // Sorteer de posities op de hoogte van de stack (ascending)
+        // Sorteer de posities op de hoogte van de stack (kleinst --> grootst / ascending)
         positions.Sort((a, b) => // .Sort gaat door elk element van de positions list
         {
             int heightA = ship.GetStack(a).Height;
@@ -99,7 +99,7 @@ public class MyAlgorithm
             // .Sort sorteert elk element met gebruik van .CompareTo resultaat
         });
 
-        // Return the sorted list
+        // sorted
         return positions;
     }
 
@@ -142,6 +142,7 @@ public class MyAlgorithm
         var list = new List<Container>();
         int id = 0;
 
+        // volgorde van containers 
 
         for (int i = 0; i < r.CoolableCount; i++)
             list.Add(new Container(id++, ContainerType.Coolable, r.CoolableWeightTons));
