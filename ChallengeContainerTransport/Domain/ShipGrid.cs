@@ -1,4 +1,5 @@
-﻿using static System.Net.Mime.MediaTypeNames;
+﻿using ChallengeContainerTransport.Domain.Exceptions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ContainerChallenge.Domain;
 
@@ -6,8 +7,8 @@ public class ShipGrid
 {
     public ShipGrid(int length, int width)
     {
-        if (length <= 0) throw new ArgumentOutOfRangeException(nameof(length));
-        if (width <= 0) throw new ArgumentOutOfRangeException(nameof(width));
+        if (length <= 0) throw new InvalidShipDimensionsException(nameof(length));
+        if (width <= 0) throw new InvalidShipDimensionsException(nameof(width));
 
         Length = length;
         Width = width;

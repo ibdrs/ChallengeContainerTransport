@@ -1,6 +1,6 @@
 ﻿using ContainerChallenge.Algorithm;
 using ContainerChallenge.Domain;
-
+using ChallengeContainerTransport.Domain.Exceptions;
 public class MyAlgorithm
 {
     private readonly PlacementValidator _placement;
@@ -14,6 +14,8 @@ public class MyAlgorithm
 
     public PlacementResponse Run(PlacementRequest request)
     {
+        ValidateRequest(request);
+
         var ship = new ShipGrid(request.Length, request.Width);
         var containers = BuildContainers(request);
 
@@ -38,6 +40,26 @@ public class MyAlgorithm
         };
     }
 
+    private static void ValidateRequest(PlacementRequest r)
+    {
+        if (r.Length <= 0 || r.Width <= 0)
+            throw new InvalidPlacementRequestException("Length and Width must be > 0.");
+
+        if (r.NormalCount < 0 || r.ValuableCount < 0 || r.CoolableCount < 0 || r.ValuableCoolableCount < 0)
+            throw new InvalidPlacementRequestException("Container counts cannot be negative.");
+
+        // weights check (consistent met Container)
+        void CheckWeight(int w, string name)
+        {
+            if (w < 4 || w > 30)
+                throw new InvalidPlacementRequestException($"{name} must be between 4 and 30 tons.");
+        }
+
+        CheckWeight(r.NormalWeightTons, nameof(r.NormalWeightTons));
+        CheckWeight(r.ValuableWeightTons, nameof(r.ValuableWeightTons));
+        CheckWeight(r.CoolableWeightTons, nameof(r.CoolableWeightTons));
+        CheckWeight(r.ValuableCoolableWeightTons, nameof(r.ValuableCoolableWeightTons));
+    }
 
     private IEnumerable<Position> CandidatePositions(ShipGrid ship, Container c)
     {
